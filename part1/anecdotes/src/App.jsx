@@ -17,12 +17,25 @@ const Votes = ({selected, votes}) =>{
   console.log('componente votes exitoso')
   console.log('points is...', votes[selected])
   console.log('selected item...', selected)
+
   return(
     <div>has {votes[selected]} votes</div>
   )
 }
 
 const Title = ({title}) => <h1>{title}</h1>
+
+const TheMostAnecdote = ({max}) =>{
+  
+  console.log('component the most active')
+  console.log('component the most active', max)
+  //console.log('the higer point is...', max)
+
+  return(
+    <>
+    </>
+  )
+}
 
 const App = () =>{
 
@@ -64,6 +77,7 @@ const anecdotes = [
       <Button handleClic= {handleVote} text='vote' />
       <Button handleClic={handleNext} text='next anecdote'/>
       <Title title={title[1]}/>
+      <TheMostAnecdote max={copy}/>
     </>
   )
 }
