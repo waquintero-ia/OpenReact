@@ -22,9 +22,13 @@ const Votes = ({selected, votes}) =>{
   )
 }
 
+const Title = ({title}) => <h1>{title}</h1>
+
 const App = () =>{
 
 const [selected, setSelect] = useState(0)
+
+const title = ['Anecdote of the day', 'Anecdote with most votes']
 
 const anecdotes = [
     'If it hurts, do it more often.',
@@ -54,10 +58,12 @@ const anecdotes = [
 
   return(
     <>
+      <Title title={title[0]}/>
       <div>{anecdotes[selected]}</div>
       <Votes selected={selected} votes={copy}/>
       <Button handleClic= {handleVote} text='vote' />
       <Button handleClic={handleNext} text='next anecdote'/>
+      <Title title={title[1]}/>
     </>
   )
 }
