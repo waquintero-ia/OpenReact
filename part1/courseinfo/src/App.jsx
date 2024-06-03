@@ -12,9 +12,17 @@ const App = () => {
   const part3 = 'State of a component'
   const exercises3 = 14
 
-  return(
-    <div>
-      <h1>{course}</h1>
+  const Header = (props) => {
+    console.log('componente header exitoso')  
+    return (
+      <h1>{props.course}</h1>
+    )
+  }
+
+  const Content = () => {
+    console.log('componente content exitoso')  
+    return (
+    <>
       <p>
         {part1} {exercises1}
       </p>
@@ -24,10 +32,25 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
+    </>  
+    )
+  }
+
+  const Total = () => {
+    console.log('componente total exitoso')
+    return (
       <p>
-        Number of excercises {exercises1 + exercises2 + exercises3}
+      Number of excercises {exercises1 + exercises2 + exercises3}
       </p>
-    </div>
+    )
+  }
+
+  return(
+    <>
+      <Header course={course} />
+      <Content />
+      <Total />
+    </>
   )
 }
 
