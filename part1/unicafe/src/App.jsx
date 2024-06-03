@@ -8,7 +8,7 @@ function App() {
   const [bad, setBad] = useState(0)
   
   const title = ['give feedback', 'statics']
-  const statics = ['good','neutral', 'bad', 'all', 'average', 'positive']
+  const statistics = ['good','neutral', 'bad', 'all', 'average', 'positive']
 
   const handleClickGood = () => setGood(good + 1)
 
@@ -24,25 +24,32 @@ function App() {
     </button>
   )
 
-  const Statics = ({statics, good, neutral, bad}) => {
+  const Statistics = ({statistics, good, neutral, bad}) => {
     let all = good + neutral + bad
     let average = ((good - bad) / all) * 100
     let positive = (good / all) * 100
+    if (good === 0 && neutral === 0 && bad === 0){
+      return(
+        <div>
+          No feedback given
+        </div>
+      )
+    }
     return(
       <>
-      <p>{statics[0]} {good}</p>
-      <p>{statics[1]} {neutral}</p>
-      <p>{statics[2]} {bad}</p>
-      <p>{statics[3]} {all}</p>
-      <p>{statics[4]} {average.toFixed(2)} %</p>
-      <p>{statics[5]} {positive.toFixed(2)} %</p>
+      <p>{statistics[0]} {good}</p>
+      <p>{statistics[1]} {neutral}</p>
+      <p>{statistics[2]} {bad}</p>
+      <p>{statistics[3]} {all}</p>
+      <p>{statistics[4]} {average.toFixed(2)} %</p>
+      <p>{statistics[5]} {positive.toFixed(2)} %</p>
       </>
     )
   }
 
   console.log(title[0])
   console.log(title[1])
-  statics.forEach (value => {console.log(value)})
+  statistics.forEach (value => {console.log(value)})
   
   return (
     <>
@@ -51,7 +58,7 @@ function App() {
       <Button handleClick={handleClickNeutral} text= 'neutral' />
       <Button handleClick={handleClickBad} text= 'bad' />
       <Header title={title[1]} />
-      <Statics statics={statics} 
+      <Statistics statistics={statistics} 
                 good={good} 
                 neutral={neutral}
                 bad={bad}
