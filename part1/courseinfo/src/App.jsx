@@ -22,7 +22,14 @@ const App = () => {
   const Content = () => {
     console.log('componente content exitoso')  
     return (
-    <>
+     <Part />
+    )
+  }
+
+  const Part = () => {
+    console.log('componente part exitoso')
+    return (
+      <>
       <p>
         {part1} {exercises1}
       </p>
@@ -32,7 +39,7 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
-    </>  
+    </> 
     )
   }
 
