@@ -25,7 +25,7 @@ function App() {
 
   const Statistics = ({good, neutral, bad}) => {
     let all = good + neutral + bad
-    let average = ((good - bad) / all) * 100
+    let average = (good - bad) / all
     let positive = (good / all) * 100
     if (good === 0 && neutral === 0 && bad === 0){
       return(
@@ -40,17 +40,37 @@ function App() {
       <StatisticLine text='neutral' value={neutral}/>
       <StatisticLine text='bad' value={bad}/>
       <StatisticLine text='all' value={all}/>
-      <StatisticLine text='average' value={average.toFixed(2)}/>
-      <StatisticLine text='positive' value={positive.toFixed(2)}/>
+      <StatisticLine text='average' value={average.toFixed(1)}/>
+      <StatisticLine text='positive' value={positive.toFixed(1)}/>
       </>
     )
   }
 
   const StatisticLine = ({text, value}) => {
-    
+  if (text === 'positive'){
+    return (
+    <>
+      <table>
+        <tbody>
+          <tr>
+          <td style={{width:"60px"}}>{text}</td>
+          <td style={{textAlign:"left", width:"60px"}}> {value} %</td>
+          </tr>
+        </tbody>
+      </table>
+    </>  
+    )
+  }  
     return(
       <>
-      <p>{text} {value}</p>
+      <table>
+        <tbody>
+          <tr>
+          <td style={{width:"60px"}}>{text}</td>
+          <td style={{textAlign:"left", width:"60px"}}> {value}</td>
+          </tr>
+        </tbody>
+      </table>
       </>
     )
   }
