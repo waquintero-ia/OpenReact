@@ -1,5 +1,27 @@
 import { useState } from 'react'
 
+const points = new Uint8Array(8)
+
+const copy = {...points}
+
+const Button = ({handleClic, text}) =>{
+
+  return(
+    <button onClick={handleClic}>
+      {text}
+    </button>
+  )
+}
+
+const Votes = ({selected, votes}) =>{
+  console.log('componente votes exitoso')
+  console.log('points is...', votes[selected])
+  console.log('selected item...', selected)
+  return(
+    <div>has {votes[selected]} votes</div>
+  )
+}
+
 const App = () =>{
 
 const [selected, setSelect] = useState(0)
@@ -17,24 +39,24 @@ const anecdotes = [
 
   const handleNext = () =>{
     console.log('clicked button next...')
-    const random = (Math.random()*(0.7)).toFixed(1)*10
+    let random = (Math.random()*(0.7)).toFixed(1)*10
+    random === selected ? random = (Math.random()*(0.7)).toFixed(1)*10 : random
     console.log('random is...', random)
     setSelect(random)
   }
 
-  const Button = ({handleClic, text}) =>{
-
-    return(
-      <button onClick={handleClic}>
-        {text}
-      </button>
-    )
+  const handleVote = () =>{
+    console.log('clicked button vote...')
+    console.log('select for vote is...', selected)
+    copy[selected] += 1
+    console.log(copy)
   }
-
 
   return(
     <>
       <div>{anecdotes[selected]}</div>
+      <Votes selected={selected} votes={copy}/>
+      <Button handleClic= {handleVote} text='vote' />
       <Button handleClic={handleNext} text='next anecdote'/>
     </>
   )
