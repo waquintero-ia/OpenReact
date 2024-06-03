@@ -8,7 +8,7 @@ function App() {
   const [bad, setBad] = useState(0)
   
   const title = ['give feedback', 'statics']
-  const statics = ['good','neutral', 'bad']
+  const statics = ['good','neutral', 'bad', 'all', 'average', 'positive']
 
   const handleClickGood = () => setGood(good + 1)
 
@@ -25,11 +25,17 @@ function App() {
   )
 
   const Statics = ({statics, good, neutral, bad}) => {
+    let all = good + neutral + bad
+    let average = ((good - bad) / all) * 100
+    let positive = (good / all) * 100
     return(
       <>
       <p>{statics[0]} {good}</p>
       <p>{statics[1]} {neutral}</p>
       <p>{statics[2]} {bad}</p>
+      <p>{statics[3]} {all}</p>
+      <p>{statics[4]} {average.toFixed(2)} %</p>
+      <p>{statics[5]} {positive.toFixed(2)} %</p>
       </>
     )
   }
