@@ -4,47 +4,47 @@ import viteLogo from '/vite.svg'
 
 
 const App = () => {
-  const course = 'Half Stack application development'
 
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
-    }
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   const Header = (props) => {
-    console.log(props)
-    console.log('componente header exitoso')  
+    console.log('componente header exitoso')
+    console.log(props.course.name)  
     return (
-      <h1>{props.course}</h1>
+      <>
+        <h1>{props.course.name}</h1>
+      </>
     )
   }
 
   const Content = (props) => {
-    console.log('componente content exitoso')  
+    console.log('componente content exitoso') 
     return (
-     <Part parts={parts}/>
+     <Part parts={props.parts} />
     )
   }
 
   const Part = (props) => {
-    const [first, ...rest] = parts
-    console.log(props.parts[0].name)
     console.log('componente part exitoso')
-    parts.forEach(value => {
-      console.log(value)
-    })
+    console.log(props.parts)
     return (
-    <>
+      <>
       <p>
           {props.parts[0].name} {props.parts[0].exercises}
         </p>  
@@ -54,24 +54,25 @@ const App = () => {
         <p>
           {props.parts[2].name} {props.parts[2].exercises}
         </p>
-      </> 
+      </>
     )
   }
 
   const Total = (props) => {
     console.log('componente total exitoso')
+    console.log(props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises)
     return (
-      <p>
-      Number of excercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}
-      </p>
+      <>
+        Number of excercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
+      </>
     )
   }
 
   return(
     <>
       <Header course={course} />
-      <Content parts={parts}/>
-      <Total parts={parts}/>
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </>
   )
 }
