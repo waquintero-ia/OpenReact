@@ -30,6 +30,7 @@ const App = () => {
   
       setPersons(persons.concat(newObject))
       setNewName('')
+      setNewNumber('')
     }
     else{
       console.log('no se puede proceder')
