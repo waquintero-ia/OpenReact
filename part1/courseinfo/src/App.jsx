@@ -34,14 +34,16 @@ const Part = ({parts}) => {
 
 const Total = ({total}) => {
   console.log('componente total exitoso')
-  let sum = 0
-  total.forEach(x => {
-    sum += x.exercises
-  });
-  console.log(sum);
+  const inicial = 0
+  let sum = total.map(part => part.exercises)
+  console.log('la suma es...',sum);
+  const totales = sum.reduce((s,p) => {
+    console.log('what is happening...', s, p);
+    return s + p
+  })
  return ( 
     <>
-      Number of excercises {sum}
+      Number of excercises {totales}
     </>
   )
 }
