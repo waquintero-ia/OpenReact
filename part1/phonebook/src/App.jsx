@@ -14,13 +14,24 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
     console.log('add clicked...', event.target);
-
-    const newObject = {
-      id: persons.length + 1,
-      name: newName
+    console.log('el nuevo nombre es...', newName)
+    console.log('el resultado del find es...', persons.find(person => person.name === 'Arto Hellas'))
+    let validateName = persons.find(person => person.name === newName)
+    console.log('la validacion del nombre es...',validateName);
+    if(validateName === undefined){
+      console.log('se puede proceder')
+        const newObject = {
+        id: persons.length + 1,
+        name: newName
+      }
+  
+      setPersons(persons.concat(newObject))
+      setNewName('')
     }
-    setPersons(persons.concat(newObject))
-    setNewName('')
+    else{
+      console.log('no se puede proceder')
+      alert(`${newName} is already added to phonebook`)
+    }
   }
 
   const handleNameChange = (event) => {
