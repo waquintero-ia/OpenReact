@@ -3,15 +3,15 @@ import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { 
-      id: 1,
-      name: 'Arto Hellas',
-      number: '040-1234567'
-    }
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newFilter, setNewFilter] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -48,10 +48,28 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const handleFilterChange = (event) => {
+    console.log(event.target.value)
+    setNewFilter(event.target.value)
+  }
+
+  const nuevoFiltro = newFilter
+  console.log('el parametro para el nuevo filtro es...', newFilter)
+
+  const personsToShow = nuevoFiltro === '' ?
+                            persons :
+                            persons.filter(persons => persons.name.toLowerCase().includes(nuevoFiltro.toLowerCase())).map(filteredName => filteredName)
+
   console.log(persons)
+  console.log('personas filtradas...',personsToShow);
+
   return (
     <div>
       <h2>Phonebook</h2>
+        <div>
+          filter shown with<input value={newFilter} onChange={handleFilterChange}/>
+        </div>
+      <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/> 
@@ -65,7 +83,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul style={{listStyleType:"none"}}>
-        {persons.map(persons => 
+        {personsToShow.map(persons => 
           <Persons key={persons.id} persons={persons} />
         )}
       </ul>
