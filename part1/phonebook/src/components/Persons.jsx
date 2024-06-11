@@ -1,8 +1,9 @@
-const Persons = ({persons}) => {
+const Persons = ({personsToShow}) => {
     return(
-        <li>
-            {persons.name} {persons.number}
-        </li>
+    <ul style={{listStyleType:"none"}}>
+        {personsToShow.map(person => <li key={person.id}>{person.name} {person.number}</li>)}
+    </ul>
+        
     )
 }
 
