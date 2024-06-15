@@ -3,18 +3,19 @@ import axios from 'axios'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
   const getPersons = () => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
+    personService
+      .getAll()
+      .then(initialPersons => {
         console.log('promise fulfilled')
-        setPersons(response.data)
-        console.log(response.data);
+        setPersons(initialPersons)
+        console.log(initialPersons);
       })
   }
 
@@ -34,15 +35,14 @@ const App = () => {
     if(validateName === undefined){
       console.log('se puede proceder')
         const newObject = {
-        id: persons.length + 1,
         name: newName,
         number: newNumber
       }
       
-      axios
-        .post('http://localhost:3001/persons', newObject)
-        .then(response => {
-          setPersons(persons.concat(response.data))
+      personService
+        .create(newObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
         })
