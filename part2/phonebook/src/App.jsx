@@ -3,6 +3,7 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -23,6 +24,9 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [message, setMessage] = useState(null)
+  const [typeMessage, setTypeMessage] = useState(null)
+
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -45,7 +49,16 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          
+          setMessage(`Added ${newObject.name}`)
+          setTypeMessage('succesfull')
+
         })
+
+        setTimeout(() => {
+          setMessage(null)
+          setTypeMessage(null)
+        }, 3000)
     }
     else{
       console.log('no se puede proceder')
@@ -66,7 +79,16 @@ const App = () => {
           setPersons(persons.map(person => person.id !== validateName.id ? person : returnedPersonUpdate))
           setNewName('')
           setNewNumber('')
+
+          setMessage(`Modified ${newObject.name}`)
+          setTypeMessage('succesfull')
         })
+        
+        setTimeout(() => {
+          setMessage(null)
+          setTypeMessage(null)
+        }, 3000)
+
       }
     }
   }
@@ -101,12 +123,6 @@ const deletePerson = id => {
     })
 }
 
-const actualizarPerson = () =>{
-
-  console.log('desea actualizar esta persona?');
-
-}
-
   const nuevoFiltro = newFilter
   console.log('el parametro para el nuevo filtro es...', newFilter)
 
@@ -120,6 +136,7 @@ const actualizarPerson = () =>{
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} typeMessage={typeMessage}/>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange}/>
       <h2>add a new</h2>
       <PersonForm addPerson={addPerson} 
