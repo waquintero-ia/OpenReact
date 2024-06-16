@@ -31,6 +31,7 @@ const App = () => {
     console.log('el resultado del find es...', persons.find(person => person.name === 'Arto Hellas'))
     let validateName = persons.find(person => person.name === newName)
     console.log('la validacion del nombre es...',validateName);
+    
     if(validateName === undefined){
       console.log('se puede proceder')
         const newObject = {
@@ -48,7 +49,25 @@ const App = () => {
     }
     else{
       console.log('no se puede proceder')
-      alert(`${newName} is already added to phonebook`)
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const newObject = {
+          name: newName,
+          number: newNumber
+        }
+        
+        console.log('proceder con la actualizacion del numero...')
+        console.log('el id a cambiar es..',validateName.id);
+        console.log(newObject);
+        
+
+        personService
+        .update(validateName.id, newObject )
+        .then(returnedPersonUpdate => {
+          setPersons(persons.map(person => person.id !== validateName.id ? person : returnedPersonUpdate))
+          setNewName('')
+          setNewNumber('')
+        })
+      }
     }
   }
 
@@ -80,6 +99,12 @@ const deletePerson = id => {
       console.log('personas despues de la eliminacion',personsAfterDelete)
       setPersons(personsAfterDelete)
     })
+}
+
+const actualizarPerson = () =>{
+
+  console.log('desea actualizar esta persona?');
+
 }
 
   const nuevoFiltro = newFilter
