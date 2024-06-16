@@ -1,9 +1,8 @@
-const Persons = ({personsToShow}) => {
+const Persons = ({personsToShow, deletePerson}) => {
+    const label = 'delete'
     return(
-    <ul style={{listStyleType:"none"}}>
-        {personsToShow.map(person => <li key={person.id}>{person.name} {person.number}</li>)}
-    </ul>
-        
+    <li>{personsToShow.name} {personsToShow.number} <button onClick={deletePerson}>{label}</button>  
+    </li>
     )
 }
 

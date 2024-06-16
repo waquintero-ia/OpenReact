@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
@@ -68,6 +67,21 @@ const App = () => {
     setNewFilter(event.target.value)
 }
 
+const deletePerson = id => {
+  console.log('effect delete')
+  console.log('encontrando el id',persons.id);
+  personService
+    .deleteOne(id)
+    .then(() => {
+      const personDeleted = persons.find(person => person.id === id)
+      alert(`Delete ${personDeleted.name} ?`)
+      console.log('persona eliminada')
+      const personsAfterDelete = persons.filter(person => person.id !== id)
+      console.log('personas despues de la eliminacion',personsAfterDelete)
+      setPersons(personsAfterDelete)
+    })
+}
+
   const nuevoFiltro = newFilter
   console.log('el parametro para el nuevo filtro es...', newFilter)
 
@@ -89,7 +103,15 @@ const App = () => {
                   newNumber={newNumber} 
                   handleNumberChange={handleNumberChange}/>
       <h2>Numbers</h2>
-     <Persons personsToShow={personsToShow} />
+      <ul>
+        {personsToShow.map(personsToShow => 
+          <Persons 
+          key={personsToShow.id} 
+          personsToShow={personsToShow} 
+          deletePerson={() => deletePerson(personsToShow.id)}
+          />
+        )}
+      </ul>
     </div>
   )
 }
