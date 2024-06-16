@@ -10,6 +10,16 @@ const Notification = ({ message, typeMessage }) => {
     marginBottom: 10
   }
 
+  const notificationError = {
+    color: 'red',
+    background: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10
+  }
+
     if (message === null) {
       return null
     }
@@ -24,7 +34,7 @@ const Notification = ({ message, typeMessage }) => {
 
       if(typeMessage === 'error'){
         return (
-          <div className="error">
+          <div style={notificationError}>
             {message}
           </div>
         )

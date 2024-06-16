@@ -52,13 +52,12 @@ const App = () => {
           
           setMessage(`Added ${newObject.name}`)
           setTypeMessage('succesfull')
-
-        })
-
-        setTimeout(() => {
-          setMessage(null)
-          setTypeMessage(null)
-        }, 3000)
+          
+          setTimeout(() => {
+            setMessage(null)
+            setTypeMessage(null)
+          }, 3000)
+       })
     }
     else{
       console.log('no se puede proceder')
@@ -82,12 +81,26 @@ const App = () => {
 
           setMessage(`Modified ${newObject.name}`)
           setTypeMessage('succesfull')
+
+          setTimeout(() => {
+            setMessage(null)
+            setTypeMessage(null)
+          }, 3000)
         })
-        
-        setTimeout(() => {
-          setMessage(null)
-          setTypeMessage(null)
-        }, 3000)
+        .catch(error => {
+          setMessage(
+            `the person '${newObject.name}' was already deleted from server`
+          )
+
+          setTypeMessage('error')
+
+          setTimeout(() => {
+            setMessage(null)
+            setTypeMessage(null)
+          }, 3000)
+          console.log('personas despues del mensaje de error',persons.filter(n => n.id !== newObject.id));
+          setPersons(persons.filter(n => n.id !== validateName.id))
+        })
 
       }
     }
