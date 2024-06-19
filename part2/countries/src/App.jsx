@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import Filter from './component/Filter'
 import countryService from './services/countries'
 import CountriesName from './component/CountriesName'
+import CountriesDetail from './component/CountriesDetails'
+import Display from './component/Display'
 
 function App() {
 
@@ -49,16 +51,8 @@ function App() {
   return (
     <>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange}/>
-      { 
-        countriesToShow.length > 10 ?
-          <CountriesName message={tooManyCountries}/> :
-          countriesToShow.map(countriesToShow =>
-            <CountriesName 
-              key={countriesToShow.name.common}
-              message={countriesToShow.name.common}
-            />
-          )
-      }
+      <Display countriesToShow={countriesToShow} tooManyCountries={tooManyCountries}/>
+    
     </>
   )
 }
