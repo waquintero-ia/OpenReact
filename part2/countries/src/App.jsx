@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import Filter from './component/Filter'
 import countryService from './services/countries'
-import CountriesName from './component/CountriesName'
-import CountriesDetail from './component/CountriesDetails'
 import Display from './component/Display'
 
 function App() {
