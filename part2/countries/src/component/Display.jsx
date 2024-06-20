@@ -6,13 +6,13 @@ const Display = ({countriesToShow, tooManyCountries}) => {
     <div>
         { 
             countriesToShow.length === 1 ? 
-              <CountriesDetail countriesToShow={countriesToShow}/> :
+              <CountriesDetail countriesToShow={countriesToShow[0]}/> :
                 countriesToShow.length > 10 ?
                   <CountriesName message={tooManyCountries}/> :
                   countriesToShow.map(countriesToShow =>
                     <CountriesName 
                       key={countriesToShow.name.common}
-                      message={countriesToShow.name.common}
+                      message={countriesToShow}
                     />
                   )
           }
