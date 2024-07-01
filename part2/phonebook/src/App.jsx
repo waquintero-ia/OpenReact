@@ -94,7 +94,7 @@ const App = () => {
           setTimeout(() => {
             setMessage(null)
             setTypeMessage(null)
-          }, 3000)
+          }, 5000)
         })
         .catch(error => {
           setMessage(
@@ -106,7 +106,7 @@ const App = () => {
           setTimeout(() => {
             setMessage(null)
             setTypeMessage(null)
-          }, 3000)
+          }, 5000)
           console.log('personas despues del mensaje de error',persons.filter(n => n.id !== newObject.id));
           setPersons(persons.filter(n => n.id !== validateName.id))
         })
@@ -142,6 +142,22 @@ const deletePerson = id => {
       const personsAfterDelete = persons.filter(person => person.id !== id)
       console.log('personas despues de la eliminacion',personsAfterDelete)
       setPersons(personsAfterDelete)
+    })
+    .catch(error => {
+      const personDeletedAlert = persons.find(person => person.id === id)
+      setMessage(
+        
+        `the person '${personDeletedAlert.name}' was already deleted from server`
+      )
+
+      setTypeMessage('error')
+
+      setTimeout(() => {
+        setMessage(null)
+        setTypeMessage(null)
+      }, 5000)
+      console.log('personas despues de la eliminacion', persons.filter(person => person.id !== id))
+      setPersons(persons.filter(person => person.id !== id))
     })
 }
 
