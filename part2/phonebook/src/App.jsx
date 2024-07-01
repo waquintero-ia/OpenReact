@@ -66,6 +66,12 @@ const App = () => {
           name: newName,
           number: newNumber
         }
+
+        const newObjectUpdated = {
+          name: newName,
+          number: newNumber,
+          id: validateName.id
+        }
         
         console.log('proceder con la actualizacion del numero...')
         console.log('el id a cambiar es..',validateName.id);
@@ -75,7 +81,10 @@ const App = () => {
         personService
         .update(validateName.id, newObject )
         .then(returnedPersonUpdate => {
-          setPersons(persons.map(person => person.id !== validateName.id ? person : returnedPersonUpdate))
+          setPersons(persons.filter(person => person.id !== validateName.id).concat(newObjectUpdated))
+          console.log('personas despues de la actualizacion...',persons.map(person => person))
+          console.log('persona modificada...', persons.find(person => person.id === validateName.id))
+          console.log('unificar persona modificada real...', persons.filter(person => person.id !== validateName.id).concat(newObjectUpdated))
           setNewName('')
           setNewNumber('')
 
