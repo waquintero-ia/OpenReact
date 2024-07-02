@@ -58,6 +58,22 @@ const App = () => {
             setTypeMessage(null)
           }, 3000)
        })
+       .catch(error => {
+        setMessage(
+          error.response.data.error
+        )
+
+        setTypeMessage('error')
+
+        setTimeout(() => {
+          setMessage(null)
+          setTypeMessage(null)
+        }, 5000)
+        console.log('se genera el mensaje de error al crear una persona');
+        //setPersons(persons.filter(n => n.id !== validateName.id))
+        setNewName('')
+        setNewNumber('')
+      })
     }
     else{
       console.log('no se puede proceder')
@@ -109,6 +125,8 @@ const App = () => {
           }, 5000)
           console.log('personas despues del mensaje de error',persons.filter(n => n.id !== newObject.id));
           setPersons(persons.filter(n => n.id !== validateName.id))
+          setNewName('')
+          setNewNumber('')
         })
 
       }
