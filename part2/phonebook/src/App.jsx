@@ -113,9 +113,28 @@ const App = () => {
           }, 5000)
         })
         .catch(error => {
-          setMessage(
-            `the person '${newObject.name}' was already deleted from server`
-          )
+          
+          console.log(error.response.data.error)
+          
+          if( error.response.data.error === undefined ){
+            setMessage(
+              `the person '${newObject.name}' was already deleted from server`
+            )
+
+            console.log('personas despues del mensaje de error',persons.filter(n => n.id !== newObject.id));
+            setPersons(persons.filter(n => n.id !== validateName.id))
+            setNewName('')
+            setNewNumber('')
+
+          }else{
+            setMessage(
+              error.response.data.error
+            )
+            console.log('personas despues del error en el numero', persons.map(person => person))
+            setNewName('')
+            setNewNumber('')
+          }
+          
 
           setTypeMessage('error')
 
@@ -123,10 +142,7 @@ const App = () => {
             setMessage(null)
             setTypeMessage(null)
           }, 5000)
-          console.log('personas despues del mensaje de error',persons.filter(n => n.id !== newObject.id));
-          setPersons(persons.filter(n => n.id !== validateName.id))
-          setNewName('')
-          setNewNumber('')
+          
         })
 
       }
